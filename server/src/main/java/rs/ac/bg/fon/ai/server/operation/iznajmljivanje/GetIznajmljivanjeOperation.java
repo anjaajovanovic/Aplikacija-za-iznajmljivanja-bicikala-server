@@ -5,6 +5,7 @@
 package rs.ac.bg.fon.ai.server.operation.iznajmljivanje;
 
 import rs.ac.bg.fon.ai.zajednicki.domain.Iznajmljivanje;
+import rs.ac.bg.fon.ai.zajednicki.domain.Korisnik;
 import rs.ac.bg.fon.ai.server.operation.AbstractGenericOperation;
 
 /**
@@ -17,7 +18,9 @@ public class GetIznajmljivanjeOperation extends AbstractGenericOperation{
     
     @Override
     protected void preconditions(Object parametar) throws Exception {
-        
+    	if(!(parametar instanceof Iznajmljivanje)) {
+            throw new Exception("Parametar nije objekat klase Iznajmljivanje.");
+        }
     }
 
     @Override
