@@ -5,6 +5,9 @@
 package rs.ac.bg.fon.ai.server.operation.korisnici;
 
 import rs.ac.bg.fon.ai.zajednicki.domain.Korisnik;
+
+import org.hamcrest.core.IsInstanceOf;
+
 import rs.ac.bg.fon.ai.server.operation.AbstractGenericOperation;
 
 /**
@@ -21,7 +24,7 @@ public class GetKorisnikOperation extends AbstractGenericOperation {
 
     @Override
     protected void preconditions(Object parametar) throws Exception {
-        if(parametar == null) {
+        if(!(parametar instanceof Korisnik)) {
             throw new Exception("Sistem nije mogao da ucita korisnika.");
         }
     }
