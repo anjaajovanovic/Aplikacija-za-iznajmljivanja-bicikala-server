@@ -15,18 +15,8 @@ public class AddKorisnikOperation extends AbstractGenericOperation {
 
     @Override
     protected void preconditions(Object parametar) throws Exception {
-        if(parametar == null) {
+        if(!(parametar instanceof Korisnik)) {
             throw new Exception("Sistem nije mogao da doda korisnika.");
-        }
-        Korisnik k = (Korisnik) parametar;
-        if(k.getIme() == null || k.getIme().isEmpty()) {
-            throw new Exception("Sistem nije mogao da doda korisnika, greska u imenu.");
-        }
-        if(k.getPrezime() == null || k.getPrezime().isEmpty()) {
-            throw new Exception("Sistem nije mogao da doda korisnika, greska u prezimenu.");
-        }
-        if(k.getEmail() == null || k.getEmail().isEmpty()) {
-            throw new Exception("Sistem nije mogao da doda korisnika, greska u emailu.");
         }
     }
 
