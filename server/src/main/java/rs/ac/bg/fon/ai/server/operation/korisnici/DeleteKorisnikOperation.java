@@ -15,7 +15,7 @@ public class DeleteKorisnikOperation extends AbstractGenericOperation {
 
     @Override
     protected void preconditions(Object parametar) throws Exception {
-        if(parametar == null) {
+        if(!(parametar instanceof Korisnik)) {
             throw new Exception("Sistem ne moze da obrise korisnika.");
         }
     }
