@@ -32,11 +32,9 @@ class AddIznajmljivanjeOperationTest {
         preparedStatementMock = mock(PreparedStatement.class);
         resultSetMock = mock(ResultSet.class);
 
-        // Mocks for PreparedStatement
         when(dbRepositoryMock.add(any(Iznajmljivanje.class))).thenReturn(preparedStatementMock);
         when(preparedStatementMock.getGeneratedKeys()).thenReturn(resultSetMock);
         
-        // Set the broker using reflection
         Field brokerField = AbstractGenericOperation.class.getDeclaredField("broker");
         brokerField.setAccessible(true);
         brokerField.set(addIznajmljivanjeOperation, dbRepositoryMock);
@@ -67,30 +65,24 @@ class AddIznajmljivanjeOperationTest {
 
 	@Test
 	void testExecuteOperation() throws Exception {
-		// Prepare test data
         Iznajmljivanje iznajmljivanje = new Iznajmljivanje();
         iznajmljivanje.setStavkaIznajmljivanja(new ArrayList<>());
 
         StavkaIznajmljivanja stavka = new StavkaIznajmljivanja();
         iznajmljivanje.getStavkaIznajmljivanja().add(stavka);
 
-        // Mock behavior for ResultSet
         when(resultSetMock.next()).thenReturn(true);
-        when(resultSetMock.getInt(1)).thenReturn(1); // Simuliraj ID 1
+        when(resultSetMock.getInt(1)).thenReturn(1);
 
-        // Call executeOperation
         addIznajmljivanjeOperation.executeOperation(iznajmljivanje, null);
 
-        // Verify interactions with mocks
         verify(dbRepositoryMock).add(iznajmljivanje);
         verify(preparedStatementMock).getGeneratedKeys();
         verify(resultSetMock).next();
         verify(resultSetMock).getInt(1);
 
-        // Verify that the ID is set in the Iznajmljivanje object
         assertEquals(1, iznajmljivanje.getId());
 
-        // Verify that stavka is correctly updated
         verify(dbRepositoryMock).add(stavka);
 	}
 
