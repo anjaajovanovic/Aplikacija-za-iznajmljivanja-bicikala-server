@@ -11,11 +11,21 @@ import java.util.List;
 import rs.ac.bg.fon.ai.server.operation.AbstractGenericOperation;
 
 /**
- *
- * @author PC
+ * Operacija koja briše iznajmljivanje iz baze podataka.
+ * 
+ * Ova klasa nasleđuje apstraktnu klasu {@link AbstractGenericOperation} i koristi
+ * metod za brisanje objekta tipa {@link Iznajmljivanje} iz baze podataka.
+ * 
+ * @author Anja Jovanovic
  */
 public class DeleteIznajmljivanjeOperation extends AbstractGenericOperation{
 
+	/**
+     * Proverava preduslove za izvršavanje operacije brisanja iznajmljivanja.
+     * 
+     * @param parametar Objekat koji se koristi za proveru preduslova. Treba biti instanca klase {@link Korisnik}.
+     * @throws Exception Ako objekat nije instanca klase {@link Korisnik}.
+     */
     @Override
     protected void preconditions(Object parametar) throws Exception {
         if(!(parametar instanceof Korisnik)) {
@@ -23,6 +33,13 @@ public class DeleteIznajmljivanjeOperation extends AbstractGenericOperation{
         }
     }
 
+    /**
+     * Izvršava operaciju brisanja iznajmljivanja iz baze podataka.
+     * 
+     * @param parametar Objekat tipa {@link Iznajmljivanje} koji se briše iz baze.
+     * @param key Ključ koji se koristi za identifikaciju (nije primenljivo ovde).
+     * @throws Exception Ako dođe do greške tokom brisanja iznajmljivanja.
+     */
     @Override
     protected void executeOperation(Object parametar, String key) throws Exception {        
         broker.delete((Iznajmljivanje)parametar);

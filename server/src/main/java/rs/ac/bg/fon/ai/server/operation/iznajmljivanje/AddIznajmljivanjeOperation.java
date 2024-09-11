@@ -10,11 +10,22 @@ import rs.ac.bg.fon.ai.server.operation.AbstractGenericOperation;
 import java.sql.*;
 
 /**
- *
- * @author PC
+ * Operacija koja dodaje novo iznajmljivanje u bazu podataka.
+ * 
+ * Ova klasa nasleđuje apstraktnu klasu {@link AbstractGenericOperation} i koristi
+ * metod za dodavanje objekta tipa {@link Iznajmljivanje} u bazu podataka. 
+ * Nakon uspešnog dodavanja iznajmljivanja, dodaje se i odgovarajuće stavke iznajmljivanja.
+ * 
+ * @author Anja Jovanovic
  */
 public class AddIznajmljivanjeOperation extends AbstractGenericOperation {
 
+	/**
+     * Proverava preduslove za izvršavanje operacije dodavanja iznajmljivanja.
+     * 
+     * @param parametar Objekat koji se koristi za proveru preduslova. Treba biti instanca klase {@link Iznajmljivanje}.
+     * @throws Exception Ako objekat nije instanca klase {@link Iznajmljivanje} ili ako iznajmljivanje nema barem jednu stavku.
+     */
     @Override
     protected void preconditions(Object parametar) throws Exception {
         if (!(parametar instanceof Iznajmljivanje)) {
@@ -28,6 +39,13 @@ public class AddIznajmljivanjeOperation extends AbstractGenericOperation {
         }
     }
 
+    /**
+     * Izvršava operaciju dodavanja iznajmljivanja u bazu podataka.
+     * 
+     * @param parametar Objekat tipa {@link Iznajmljivanje} koji se dodaje u bazu.
+     * @param key Ključ koji se koristi za identifikaciju (nije primenljivo ovde).
+     * @throws Exception Ako dođe do greške tokom dodavanja iznajmljivanja ili stavki iznajmljivanja.
+     */
     @Override
     protected void executeOperation(Object parametar, String key) throws Exception {
         
